@@ -19,12 +19,6 @@ public class eval {
     public String root;
     protected String nom;
     eval(String nominative, String gen, byte declnum) {
-        //root = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        //msg.debug("Root : " + root);
-        //String filename =  "declension.properties";
-        //String file = this.root + filename;
-        //msg.debug("Properties : " + filename);
-        //eval.load_props(file);
         nom = nominative;
         decl = declnum;
         base = latinutils.getbase(gen, decl);
@@ -33,17 +27,6 @@ public class eval {
             msg.die("Not using latin. Unsupported.");
         }
     }
-    //private static void load_props(String file) throws Exception{
-    //    Properties props = new Properties();
-    //    try {
-    //        props.load(new FileInputStream(file));
-    //    } catch (FileNotFoundException excpt) {
-    //        msg.die("Properties file not found.");
-    //        throw excpt;
-    //    }
-    //    print_vocatives = Boolean.parseBoolean(props.getProperty("print_vocatives", "false"));
-    //    print_locatives = Boolean.parseBoolean(props.getProperty("print_locatives", "false"));
-    //}
     protected void exceptions(){
         msg.die("Call this from the subclass.", 1);
     }
