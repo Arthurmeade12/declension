@@ -1,10 +1,10 @@
 package me.arthurmeade12.decliner;
 import java.util.Arrays;
 import java.util.Properties;
-import java.io.FileInputStream;
-import java.lang.Boolean;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 public class eval {
+    public static final String configfile = "declensio.properties";
     public static boolean print_vocatives;
     public static boolean print_locatives;
     public static byte padding = 1;
@@ -16,9 +16,8 @@ public class eval {
     protected String base;
     protected char gender;
     protected byte decl;
-    public String root;
     protected String nom;
-    eval(String nominative, String gen, byte declnum) {
+    eval(String nominative, String gen, byte declnum){
         nom = nominative;
         decl = declnum;
         base = latinutils.getbase(gen, decl);
@@ -26,6 +25,22 @@ public class eval {
         if (lang != "latin") {
             msg.die("Not using latin. Unsupported.");
         }
+        try {
+            eval.evalprops();
+        }
+        catch(IOException e) {
+            msg.warn("Creating default config.");
+        }
+    }
+    private static void evalprops() throws IOException {
+        FileReader config = new FileReader(configfile);
+        Properties p = new Properties();
+        p.load(config);
+        print_vocatives = Boolean.parseBoolean(p.getProperty("print_vocatives"));
+        print_locatives = Boolean.parseBoolean(p.getProperty("print_locatives"));
+        msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
+        padding = Byte.parseByte(p.getProperty("padding"));
+        latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
     }
     protected void exceptions(){
         msg.die("Call this from the subclass.", 1);
@@ -62,7 +77,6 @@ public class eval {
         for (byte f = 0; f < cases; f++){
             declension[f][elements_from_base] = " ".repeat(spacing[f]);
         }
-
     }
     public void complete(){
         System.out.println();
