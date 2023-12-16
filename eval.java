@@ -25,22 +25,6 @@ public class eval {
         if (lang != "latin") {
             msg.die("Not using latin. Unsupported.");
         }
-        try {
-            eval.evalprops();
-        }
-        catch(IOException e) {
-            msg.warn("Creating default config.");
-        }
-    }
-    private static void evalprops() throws IOException {
-        FileReader config = new FileReader(configfile);
-        Properties p = new Properties();
-        p.load(config);
-        print_vocatives = Boolean.parseBoolean(p.getProperty("print_vocatives"));
-        print_locatives = Boolean.parseBoolean(p.getProperty("print_locatives"));
-        msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
-        padding = Byte.parseByte(p.getProperty("padding"));
-        latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
     }
     protected void exceptions(){
         msg.die("Call this from the subclass.", 1);
@@ -59,6 +43,9 @@ public class eval {
             declension[3][1] = base + "a";
         }
         this.exceptions();
+        this.spacing();
+    }
+    private void spacing(){
         //// spacing
         // we are looping over cases again but this after exceptions are processed, so things are diffferent
         // maybe add option for right-justify
