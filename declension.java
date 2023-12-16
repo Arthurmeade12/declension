@@ -6,7 +6,24 @@
 package me.arthurmeade12.decliner;
 import java.util.Scanner;
 public class declension {
+    private static void evalprops() throws IOException {
+        FileReader config = new FileReader(configfile);
+        Properties p = new Properties();
+        p.load(config);
+        eval.print_vocatives = Boolean.parseBoolean(p.getProperty("print_vocatives"));
+        eval.print_locatives = Boolean.parseBoolean(p.getProperty("print_locatives"));
+        msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
+        eval.padding = Byte.parseByte(p.getProperty("padding"));
+        latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
+    }
     public static void main(String[] args) {
+        try {
+            declension.evalprops();
+        }
+        catch(IOException e) {
+            msg.warn("Creating default config. Restart the application.");
+
+        }
         String nom, gen;
         Scanner input = new Scanner(System.in);
         if (args.length >= 2) {

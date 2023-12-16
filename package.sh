@@ -11,4 +11,4 @@ then
 	javac -d "${TARGET}" "${TARGET}"/**/*.java
 fi
 jar -c -f "${TARGET}/${JARNAME}" -e "${MAINCLASS}" "${TARGET}/${COMPILEPATH}"
-
+exit "${?}"
