@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eu
 TARGET="${TARGET:=.}"
 JARNAME='declension.jar'
 MAINCLASS='me.arthurmeade12.decliner.declension'
