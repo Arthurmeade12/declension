@@ -1,9 +1,13 @@
 package me.arthurmeade12.decliner;
 import java.util.Arrays;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.lang.Boolean;
+import java.io.FileNotFoundException;
 public class eval {
-    public static final boolean print_vocatives = false;
-    public static final boolean print_locatives = false;
-    public static final byte padding = 1;
+    public static boolean print_vocatives;
+    public static boolean print_locatives;
+    public static byte padding = 1;
     public String lang = "latin";
     public byte cases = 7; // for latin
     public byte elements = 3; // for latin
@@ -12,16 +16,34 @@ public class eval {
     protected String base;
     protected char gender;
     protected byte decl;
+    public String root;
     protected String nom;
     eval(String nominative, String gen, byte declnum) {
+        //root = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        //msg.debug("Root : " + root);
+        //String filename =  "declension.properties";
+        //String file = this.root + filename;
+        //msg.debug("Properties : " + filename);
+        //eval.load_props(file);
         nom = nominative;
         decl = declnum;
         base = latinutils.getbase(gen, decl);
         gender = latinutils.getgender(nom, gen, decl);
         if (lang != "latin") {
-            msg.warn("Not using latin. Unsupported.");
+            msg.die("Not using latin. Unsupported.");
         }
     }
+    //private static void load_props(String file) throws Exception{
+    //    Properties props = new Properties();
+    //    try {
+    //        props.load(new FileInputStream(file));
+    //    } catch (FileNotFoundException excpt) {
+    //        msg.die("Properties file not found.");
+    //        throw excpt;
+    //    }
+    //    print_vocatives = Boolean.parseBoolean(props.getProperty("print_vocatives", "false"));
+    //    print_locatives = Boolean.parseBoolean(props.getProperty("print_locatives", "false"));
+    //}
     protected void exceptions(){
         msg.die("Call this from the subclass.", 1);
     }
@@ -55,13 +77,13 @@ public class eval {
         }
         msg.debug("Spacing: " + Arrays.toString(spacing));
         for (byte f = 0; f < cases; f++){
-            msg.debug("Spaces : \"" + " ".repeat(spacing[f]) + "\"");
             declension[f][elements_from_base] = " ".repeat(spacing[f]);
         }
 
     }
     public void complete(){
         System.out.println();
+        msg.debug("complete() invoked.");
         System.out.println(declension[0][0] +  declension[0][2] +  declension[0][1]);
         System.out.println(declension[1][0] +  declension[1][2] +  declension[1][1]);
         System.out.println(declension[2][0] +  declension[2][2] +  declension[2][1]);

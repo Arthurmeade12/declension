@@ -1,11 +1,12 @@
 package me.arthurmeade12.decliner;
 import java.util.Scanner;
 public class latinutils {
-    public static boolean case_sensitive = true;
+    public static boolean case_sensitive = false;
     public static byte getdecl(String nominative, String genitive) {
-        String temp = genitive.substring(genitive.length()-2);
-        String ending = temp.toLowerCase();
-        temp = null;
+        String ending = genitive.substring(genitive.length()-2);
+        if (case_sensitive = false){
+            ending = ending.toLowerCase();
+        }
         byte error = 0;
         switch (ending) {
         case "ae":
