@@ -14,6 +14,4 @@ public class fifth extends eval {
         super(nom, gen, num);
         super.makedecl(endings);
     }
-    @Override // even though there are no exceptions we still need to override to prevent the eval class from complaining
-    public void exceptions(){}
 }

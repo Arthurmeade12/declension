@@ -20,9 +20,7 @@ public class eval {
         base = latinutils.getbase(gen, decl);
         gender = latinutils.getgender(nom, gen, decl);
     }
-    protected void exceptions(){
-        msg.die("Call this from the subclass.", 1);
-    }
+    protected void exceptions(){}
     protected void makedecl(String[][] endings){
         for (byte a = 0; a < cases; a++) {
             for (byte b = 0; b < from_base; b++){

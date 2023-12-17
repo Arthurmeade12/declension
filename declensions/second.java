@@ -14,6 +14,4 @@ public class second extends eval {
         super(nom, gen, num);
         super.makedecl(endings);
     }
-    @Override
-    public void exceptions() {}
 }
