@@ -24,8 +24,9 @@ public class fourth extends eval {
             declension[2][2] = "  ";
             declension[3][2] = "  ";
         }
-        if (nom == "domus") {
-            declension[2][0] = "domo";
+        if (nom.equals("domus")) {
+            // gender f is already handled by getgender()
+            declension[4][0] = "domo";
             declension[6][0] = "domi";
         }
     }
