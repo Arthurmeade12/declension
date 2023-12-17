@@ -4,7 +4,7 @@ TARGET="${TARGET:=.}"
 JARNAME='declension.jar'
 MAINCLASS='me.arthurmeade12.decliner.declension'
 COMPILEPATH='me/arthurmeade12/decliner'
-COMPDECL=false
+COMPDECL=${COMPDECL:=false};
 javac -d "${TARGET}" "${TARGET}"/*.java
 if [[ "${COMPDECL}" == 'true' ]]
 then

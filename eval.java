@@ -1,10 +1,6 @@
 package me.arthurmeade12.decliner;
 import java.util.Arrays;
-import java.util.Properties;
-import java.io.FileReader;
-import java.io.IOException;
 public class eval {
-    public static final String configfile = "declensio.properties";
     public static boolean print_vocatives;
     public static boolean print_locatives;
     public static byte padding = 1;
