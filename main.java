@@ -7,8 +7,9 @@ import java.util.Scanner;
 import java.util.Properties;
 import java.io.FileReader;
 import java.io.IOException;
-public class declension {
-        public static final String configfile = "declension.properties";
+public class main {
+    public static final String configfile = "declension.properties";
+    public static String lang = "latin";
     protected static void evalprops() throws IOException {
         FileReader config = new FileReader(configfile);
         Properties p = new Properties();
@@ -17,11 +18,12 @@ public class declension {
         eval.print_locatives = Boolean.parseBoolean(p.getProperty("print_locatives"));
         msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
         eval.padding = Byte.parseByte(p.getProperty("padding"));
+        eval.columns = Boolean.parseBoolean(p.getProperty("columns"));
         latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
     }
     public static void main(String[] args) {
         try {
-            declension.evalprops();
+            main.evalprops();
         }
         catch(IOException e) {
             msg.warn("Creating default config. Restart the application.");
