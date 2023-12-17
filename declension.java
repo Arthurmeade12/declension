@@ -1,12 +1,15 @@
 //
-// Decliner by Arthurmeade12 (https://github.com/Arthurmeade12)
-// Compiled and tested with Java 17
-// MIT License
+// Decliner by Arthurmeade12 (https://github.com/Arthurmeade12/declension)
+// Compiled and tested with Temurin 17
 //
 package me.arthurmeade12.decliner;
 import java.util.Scanner;
+import java.util.Properties;
+import java.io.FileReader;
+import java.io.IOException;
 public class declension {
-    private static void evalprops() throws IOException {
+        public static final String configfile = "declension.properties";
+    protected static void evalprops() throws IOException {
         FileReader config = new FileReader(configfile);
         Properties p = new Properties();
         p.load(config);
