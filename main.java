@@ -6,7 +6,7 @@ package me.arthurmeade12.decliner;
 import java.util.Scanner;
 import java.io.IOException;
 public class main {
-    public static void byte version = 2;
+    public static final byte version = 2;
     public static void main(String[] args) {
         try {
             config.evalprops();
