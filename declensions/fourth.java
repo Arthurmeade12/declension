@@ -18,6 +18,7 @@ public class fourth extends eval {
     public void exceptions() {
         if (gender == 'n') {
             declension[2][0] = declension[0][0];
+            declension[5][0] = declension[0][0];
             declension[0][1] = base + "ua";
             declension[3][1] = base + "ua";
             declension[0][2] = "  ";
