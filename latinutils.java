@@ -2,19 +2,7 @@ package me.arthurmeade12.decliner;
 import java.util.Scanner;
 public class latinutils {
     public static boolean case_sensitive = false;
-    public static String lang;
-    public static boolean wronglang(){
-        if (lang.equals("latin")) {
-            return false;
-        } else {
-            msg.warn("Wrong language.");
-            return true;
-        }
-    }
     public static byte getdecl(String nominative, String genitive) {
-        if (latinutils.wronglang()){
-            return 0;
-        }
         String ending = genitive.substring(genitive.length()-2);
         if (case_sensitive = false){
             ending = ending.toLowerCase();
@@ -75,9 +63,6 @@ public class latinutils {
         }
     }
     public static String getbase(String genitive, byte decl) {
-        if (latinutils.wronglang()){
-            return "";
-        }
         switch (decl) {
         case 1:
         case 3:
@@ -96,9 +81,6 @@ public class latinutils {
         }
     }
     public static char getgender(String nominative, String genitive, byte decl) {
-        if (latinutils.wronglang()){
-            return '0';
-        }
         switch (decl) {
         case 1:
             switch (nominative) {
