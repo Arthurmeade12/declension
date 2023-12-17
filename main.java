@@ -4,29 +4,15 @@
 //
 package me.arthurmeade12.decliner;
 import java.util.Scanner;
-import java.util.Properties;
-import java.io.FileReader;
 import java.io.IOException;
 public class main {
-    public static final String configfile = "declension.properties";
-    protected static void evalprops() throws IOException {
-        FileReader config = new FileReader(configfile);
-        Properties p = new Properties();
-        p.load(config);
-        eval.print_vocatives = Boolean.parseBoolean(p.getProperty("print_vocatives"));
-        eval.print_locatives = Boolean.parseBoolean(p.getProperty("print_locatives"));
-        msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
-        eval.padding = Byte.parseByte(p.getProperty("padding"));
-        eval.columns = Boolean.parseBoolean(p.getProperty("columns"));
-        latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
-    }
+    public static void byte version = 2;
     public static void main(String[] args) {
         try {
-            main.evalprops();
+            config.evalprops();
         }
         catch(IOException e) {
-            msg.warn("Creating default config. Restart the application.");
-
+            config.createprops();
         }
         String nom, gen;
         Scanner input = new Scanner(System.in);
