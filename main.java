@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 public class main {
     public static final String configfile = "declension.properties";
-    public static String lang = "latin";
     protected static void evalprops() throws IOException {
         FileReader config = new FileReader(configfile);
         Properties p = new Properties();
