@@ -46,7 +46,7 @@ public class config {
         }
     }
     private static void realcreateprops() throws MalformedURLException, IOException, FileNotFoundException {
-        msg.warn("Downloading default config.");
+        msg.warn("Downloading default config at " + configfile + ".");
         URL remote = new URL(url);
         ReadableByteChannel rbc = Channels.newChannel(remote.openStream());
         FileOutputStream output = new FileOutputStream(configfile);
