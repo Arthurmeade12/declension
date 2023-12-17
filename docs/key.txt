@@ -34,5 +34,6 @@ n = neuter
 2 - 3 invalid answers from user while trying to determine gender
 3 - properties file not found
 4 - invalid language
+5 - failure creating default config.
 anything else - consult JVM manual
 
