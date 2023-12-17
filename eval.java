@@ -18,7 +18,11 @@ public class eval {
         nom = nominative;
         decl = declnum;
         base = latinutils.getbase(gen, decl);
-        gender = latinutils.getgender(nom, gen, decl);
+        if (main.gender == null) {
+            gender = latinutils.getgender(nom, gen, decl);
+        } else {
+            gender = main.gender;
+        }
     }
     protected void exceptions(){}
     protected void makedecl(String[][] endings){

@@ -15,11 +15,15 @@ public class main {
             config.createprops();
         }
         String nom, gen;
+        char gender;
         Scanner input = new Scanner(System.in);
         if (args.length >= 2) {
             nom = args[0];
             gen = args[1];
-            for (int i = 2; i < args.length; i++) {
+            if (args[2] != null) {
+                gender = args[2].charAt(0);
+            }
+            for (int i = 3; i < args.length; i++) {
                 msg.warn("Argument " + args[i] + " ignored.");
             }
         } else {
