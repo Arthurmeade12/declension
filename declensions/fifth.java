@@ -1,13 +1,13 @@
 package me.arthurmeade12.decliner;
 public class fifth extends eval {
     public static final String[][] endings = {
-        {"es", "es"}, // nominative
-        {"ei", "erum"}, // genitive
-        {"ei", "ebus"}, // dative
-        {"em", "es"}, // accusative
-        {"e", "ebus"}, // ablative
-        {"es", "es"}, // vocative
-        {"ei", "ibus"} // locative
+        {"es", "es"},
+        {"ei", "erum"},
+        {"ei", "ebus"},
+        {"em", "es"},
+        {"e", "ebus"},
+        {"es", "es"},
+        {"ei", "ibus"}
     };
     public static final byte num = 5;
     fifth(String nom, String gen) {

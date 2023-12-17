@@ -1,13 +1,13 @@
 package me.arthurmeade12.decliner;
 public class fourth extends eval {
     public static final String[][] endings = {
-        {"us", "us"}, // nominative
-        {"us", "uum"}, // genitive
-        {"ui", "ibus"}, // dative
-        {"um", "us"}, // accusative
-        {"u", "ibus"}, // ablative
-        {"us", "us"}, // vocative
-        {"us", "ibus"} // locative
+        {"us", "us"},
+        {"us", "uum"},
+        {"ui", "ibus"},
+        {"um", "us"},
+        {"u", "ibus"},
+        {"us", "us"},
+        {"us", "ibus"}
     };
     public static final byte num = 4;
     fourth(String nom, String gen) {

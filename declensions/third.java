@@ -1,13 +1,13 @@
 package me.arthurmeade12.decliner;
 public class third extends eval {
     public static final String[][] endings = {
-        {"-", "es"}, // nominative // set sing. to - since nom. sing has no rules
-        {"is", "um"}, // genitive
-        {"i", "ibus"}, // dative
-        {"em", "es"}, // accusative
-        {"e", "ibus"}, // ablative
-        {"-", "es"}, // vocative // will set to nom. in exceptions()
-        {"is", "ibus"} // locative
+        {"-", "es"}, // set sing. to - since nom. sing has no rules
+        {"is", "um"},
+        {"i", "ibus"},
+        {"em", "es"},
+        {"e", "ibus"},
+        {"-", "es"}, // will set to nom. in exceptions()
+        {"is", "ibus"}
     };
     public static final byte num = 3;
     third(String nom, String gen) {
