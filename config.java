@@ -16,12 +16,18 @@ public class config {
         FileReader config = new FileReader(configfile);
         Properties p = new Properties();
         p.load(config);
-        if (p.getProperty("config_version") != main.version) {
-            msg.warn("The application is out of date. Please update.");
+        if (Byte.parseByte(p.getProperty("config_version")) < main.version) {
+            msg.warn("Development environment detected. Local version is greater than the remote version.");
+            msg.warn ("Forcing debug messages on.");
+            msg.debug = true;
+        } else {
+            if (Byte.parseByte(p.getProperty("config_version")) > main.version) {
+                msg.warn("The application is out of date. Please update.");
+            }
+            msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
         }
         eval.print_vocatives = Boolean.parseBoolean(p.getProperty("print_vocatives"));
         eval.print_locatives = Boolean.parseBoolean(p.getProperty("print_locatives"));
-        msg.debug = Boolean.parseBoolean(p.getProperty("debug"));
         eval.padding = Byte.parseByte(p.getProperty("padding"));
         eval.columns = Boolean.parseBoolean(p.getProperty("columns"));
         latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
