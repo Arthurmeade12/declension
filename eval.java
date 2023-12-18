@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class eval {
     public static boolean print_vocatives;
     public static boolean print_locatives;
+    public static boolean extraline = false;
     public static boolean columns;
     public static byte padding = 1;
     public static final byte cases = 7;
@@ -17,11 +18,21 @@ public class eval {
         msg.debug("Nominative : " + nominative);
         nom = nominative;
         decl = declnum;
-        base = latinutils.getbase(gen, decl);
-        if (main.gender == null) {
-            gender = latinutils.getgender(nom, gen, decl);
-        } else {
-            gender = main.gender;
+        base = latinutils.getbase(nom, gen, decl);
+        gender = this.determine_gender(nom, gen, decl);
+    }
+    private char determine_gender(String nom, String gen, byte decl){
+        switch (main.gender) {
+        case 'm':
+        case 'f':
+        case 'n':
+            return main.gender;
+        case 'M':
+        case 'F':
+        case 'N':
+            return Character.toUpperCase(main.gender);
+        default:
+            return latinutils.getgender(nom, gen, decl);
         }
     }
     protected void exceptions(){}
@@ -67,7 +78,9 @@ public class eval {
         }
     }
     public void complete(){
-        System.out.println();
+        if (extraline) {
+            System.out.println();
+        }
         msg.debug("complete() invoked.");
         System.out.println(declension[0][0] +  declension[0][2] +  declension[0][1]);
         System.out.println(declension[1][0] +  declension[1][2] +  declension[1][1]);
