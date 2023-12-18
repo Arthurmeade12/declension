@@ -12,10 +12,16 @@ import java.util.Properties;
 public class config {
     public static final String configfile = "declension.properties";
     public static final String url = "https://raw.githubusercontent.com/Arthurmeade12/declension/main/" + configfile;
-    public static void evalprops() throws IOException {
-        FileReader config = new FileReader(configfile);
+    public static void evalprops(){
+        FileReader configreader;
         Properties p = new Properties();
-        p.load(config);
+        try {
+            configreader = new FileReader(configfile);
+            p.load(configreader);
+        } catch (IOException a) {
+            config.createprops();
+            System.exit(0);
+        }
         if (Byte.parseByte(p.getProperty("config_version")) < main.version) {
             msg.warn("Development environment detected. Local version is greater than the remote version.");
             msg.warn ("Forcing debug messages on.");
@@ -32,27 +38,27 @@ public class config {
         eval.columns = Boolean.parseBoolean(p.getProperty("columns"));
         latinutils.case_sensitive = Boolean.parseBoolean(p.getProperty("case_sensitive"));
     }
-    public static void createprops(){
+    public static boolean createprops() {
+        // returns success
+        msg.warn("Downloading default config at " + configfile + ".");
         try {
-            config.realcreateprops();
+            URL remote = new URL(url);
+            ReadableByteChannel rbc = Channels.newChannel(remote.openStream());
+            FileOutputStream output = new FileOutputStream(configfile);
+            FileChannel channel = output.getChannel();
+            channel.transferFrom(rbc, 0, Long.MAX_VALUE);
         }
         catch (MalformedURLException a) {
             a.printStackTrace();
-            msg.die("Invalid URL.", 5);
+            msg.die("Invalid URL.");
+            return false;
         }
         catch (IOException b) {
             b.printStackTrace();
             msg.die("Could not contact the remote server at " + url + ".");
+            return false;
         }
-    }
-    private static void realcreateprops() throws MalformedURLException, IOException, FileNotFoundException {
-        msg.warn("Downloading default config at " + configfile + ".");
-        URL remote = new URL(url);
-        ReadableByteChannel rbc = Channels.newChannel(remote.openStream());
-        FileOutputStream output = new FileOutputStream(configfile);
-        FileChannel channel = output.getChannel();
-        channel.transferFrom(rbc, 0, Long.MAX_VALUE);
         msg.out("Download of default config complete. Please restart the application.");
-        System.exit(0);
+        return true;
     }
 }
