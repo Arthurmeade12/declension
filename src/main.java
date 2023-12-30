@@ -1,7 +1,7 @@
-//
-// Decliner by Arthurmeade12 (https://github.com/Arthurmeade12/declension)
-// Compiled and tested with Temurin 17
-//
+/*
+    Decliner by Arthurmeade12 (https://github.com/Arthurmeade12/declension)
+    Compiled and tested with Temurin 17
+*/
 package me.arthurmeade12.decliner;
 import java.util.Scanner;
 import java.io.IOException;
@@ -10,7 +10,7 @@ public class main {
     public static char gender;
     public static String nominative;
     public static String genitive;
-        public static void exec(String nom, String gen){
+    public static void exec(String nom, String gen){
         byte decl = latinutils.getdecl(nominative, genitive);
         msg.debug("Declension : " + decl);
         switch (decl) {
