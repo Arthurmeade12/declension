@@ -1,0 +1,39 @@
+# Output of getdecl()
+# Signature: public static byte getdecl(String nominative, String genitive) {
+0 - not latin
+1 - first
+2 - second
+3 - third
+4 - fourth
+5 - fifth
+6 - special declension (alius is ille etc)
+7 - interrogative or relative
+8 - hic haec hoc
+
+#Key for master array (declension[][]):
+0 singular, 1 plural
+
+0 - nominative
+1 - genitive
+2 - dative
+3 - accusative
+4 - ablative
+5 - vocative
+6 - locative
+
+# Output of getgender() :
+# Signature: public static char getgender(String nominative, String genitive, byte decl)
+m = masculine
+f = feminine
+n = neuter
+0 = no gender could be determined
+
+# System exit codes:
+0 - no errors
+1 - exceptions() can only be called from a subclass
+2 - 3 invalid answers from user while trying to determine gender
+3 - properties file not found
+4 - invalid language
+5 - failure creating default config.
+anything else - consult JVM manual
+

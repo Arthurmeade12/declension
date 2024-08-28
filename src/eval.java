@@ -1,33 +1,44 @@
 package me.arthurmeade12.decliner;
 import java.util.Arrays;
 public class eval {
-    public static final boolean print_vocatives = false;
-    public static final boolean print_locatives = false;
-    public static final byte padding = 1;
-    public String lang = "latin";
-    public byte cases = 7; // for latin
-    public byte elements = 3; // for latin
-    public byte elements_from_base = 2; // for latin // spacing must be first element after forms derived from base
+    public static boolean print_vocatives;
+    public static boolean print_locatives;
+    public static boolean extraline = false;
+    public static boolean columns;
+    public static byte padding = 1;
+    public static final byte cases = 7;
+    public static final byte elements = 3;
+    public static byte from_base = 2;
     protected String[][] declension = new String[cases][elements];
     protected String base;
     protected char gender;
     protected byte decl;
     protected String nom;
-    eval(String nominative, String gen, byte declnum) {
+    eval(String nominative, String gen, byte declnum){
+        msg.debug("Nominative : " + nominative);
         nom = nominative;
         decl = declnum;
-        base = latinutils.getbase(gen, decl);
-        gender = latinutils.getgender(nom, gen, decl);
-        if (lang != "latin") {
-            msg.warn("Not using latin. Unsupported.");
+        base = latinutils.getbase(nom, gen, decl);
+        gender = this.determine_gender(nom, gen, decl);
+    }
+    private char determine_gender(String nom, String gen, byte decl){
+        switch (main.gender) {
+        case 'm':
+        case 'f':
+        case 'n':
+            return main.gender;
+        case 'M':
+        case 'F':
+        case 'N':
+            return Character.toUpperCase(main.gender);
+        default:
+            return latinutils.getgender(nom, gen, decl);
         }
     }
-    protected void exceptions(){
-        msg.die("Call this from the subclass.", 1);
-    }
+    protected void exceptions(){}
     protected void makedecl(String[][] endings){
         for (byte a = 0; a < cases; a++) {
-            for (byte b = 0; b < elements_from_base; b++){
+            for (byte b = 0; b < from_base; b++){
                 declension[a][b] = base + endings[a][b];
             }
         }
@@ -39,29 +50,38 @@ public class eval {
             declension[3][1] = base + "a";
         }
         this.exceptions();
+        if (columns == false){
+            for (byte g = 0; g < cases; g++) {
+                declension[g][from_base] = " ".repeat(padding);
+            }
+        } else {
+            this.spacing();
+        }
+    }
+    private void spacing(){
         //// spacing
         // we are looping over cases again but this after exceptions are processed, so things are diffferent
-        // maybe add option for right-justify
         int[] spaces = new int[cases];
         for (byte d = 0; d < cases; d++){
             spaces[d] = declension[d][0].length();
         }
         msg.debug("Spaces: " + Arrays.toString(spaces));
         int length = Arrays.stream(spaces).max().getAsInt() + padding;
-        msg.debug("Longest + 1: " + length);
+        msg.debug("Longest + " + padding + " (padding) : " + length);
         int[] spacing = new int[cases];
         for (byte e = 0; e < cases; e++) {
             spacing[e] = length - spaces[e];
         }
         msg.debug("Spacing: " + Arrays.toString(spacing));
         for (byte f = 0; f < cases; f++){
-            msg.debug("Spaces : \"" + " ".repeat(spacing[f]) + "\"");
-            declension[f][elements_from_base] = " ".repeat(spacing[f]);
+            declension[f][from_base] = " ".repeat(spacing[f]);
         }
-
     }
     public void complete(){
-        System.out.println();
+        if (extraline) {
+            System.out.println();
+        }
+        msg.debug("complete() invoked.");
         System.out.println(declension[0][0] +  declension[0][2] +  declension[0][1]);
         System.out.println(declension[1][0] +  declension[1][2] +  declension[1][1]);
         System.out.println(declension[2][0] +  declension[2][2] +  declension[2][1]);
